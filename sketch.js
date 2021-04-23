@@ -62,13 +62,13 @@ function main(data) {
 
     svg.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate(0," + (HEIGHT - xAxisPadding)
+        .attr("transform", "translate(190," + (HEIGHT - xAxisPadding)
             + ")")
         .call(xAxis);
 
     svg.append("g")
         .attr("class", "grid")
-        .attr("transform", "translate(0," + (HEIGHT - xAxisPadding)
+        .attr("transform", "translate(190," + (HEIGHT - xAxisPadding)
             + ")")
         .call(make_x_gridlines(xScale)
             .tickSize(-HEIGHT)
@@ -87,7 +87,7 @@ function main(data) {
 
         })
         .attr("width", function(d) {
-            return d.attackStat*10;
+            return d.attackStat*20;
         })
         .attr("height", (HEIGHT - 100) / data.length - barPadding)
         .attr("fill", function(d) {

@@ -1,4 +1,4 @@
-var WIDTH = 500;
+var WIDTH = 1000;
 var HEIGHT = 5000;
 var barPadding = 5;
 var xLabelPadding = 15;
@@ -9,7 +9,7 @@ function load() {
     d3.csv("result.csv", function(d) {
         return {
             name: d.dataName,
-            attackStat: +d["data__|__info__defense"]
+            attackStat: +d["data__|__stats__hp"]
         };
     }).then(function(data) {
         main(data);
@@ -48,14 +48,14 @@ function main(data) {
         .attr("text-anchor", "middle")
         .attr("x", WIDTH/2)
         .attr("y", HEIGHT - 30)
-        .text("Defense stats");
+        .text("Health stats");
 //this is th scale
     var xScale = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) {
             return d.attackStat;
         })])
         .range([10, d3.max(data, function(d) {
-            return d.attackStat+200;
+            return d.attackStat+50;
         })]);
 
     var xAxis = d3.axisBottom(xScale);
@@ -87,7 +87,7 @@ function main(data) {
 
         })
         .attr("width", function(d) {
-            return d.attackStat*20;
+            return d.attackStat;
         })
         .attr("height", (HEIGHT - 100) / data.length - barPadding)
         .attr("fill", function(d) {

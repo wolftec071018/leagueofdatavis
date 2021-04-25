@@ -9,7 +9,7 @@ function load() {
     d3.csv("result.csv", function(d) {
         return {
             name: d.dataName,
-            attackStat: +d["data__|__info__defense"]
+            attackStat: +d["data__|__info__attack"]
         };
     }).then(function(data) {
         main(data);
@@ -48,7 +48,7 @@ function main(data) {
         .attr("text-anchor", "middle")
         .attr("x", WIDTH/2)
         .attr("y", HEIGHT - 30)
-        .text("Defense stats");
+        .text("Attack stats");
 //this is th scale
     var xScale = d3.scaleLinear()
         .domain([0, d3.max(data, function(d) {

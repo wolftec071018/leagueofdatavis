@@ -1,16 +1,83 @@
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <head>
         <title>node link</title>
         <script src="https://d3js.org/d3.v6.min.js"></script>
 
     </head>
     <body>
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <script src="sketch.js"></script>
-        <svg></svg>
+      <h1>league project beta</h1>
+
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="attackBarChart.html">Attack Stats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="defenseBarChart.html">Defense Stats</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="healthBarChart.html">Health Stats</a>
+        </li>
+      </ul>
+
+<!-- this is after the nav bar -->
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        About This website
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        League of Legends is one of the most popular free to play games. That said there is a huge learning curve as well as over 150 different champions a player can pick from. The Goal of this website is to have all the stats ready for players to find.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        About Me
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Hello, My name is Andrew Dao. I am a student at USF who majors in computer science. Ive been playing league for 5+ years and thought making a data vizulation would be fun for my final project.      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Next steps
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <li>
+          Add more charts then just bar charts
+        </li>
+        <li>
+          Add user interaction
+        </li>
+        <li>
+          Add images
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
 
     </body>
 </html>

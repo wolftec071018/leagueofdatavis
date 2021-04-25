@@ -69,7 +69,14 @@ d3.csv("result-2.csv", function (d) {
       .attr("r", 5)
       .attr("fill", function (d) {
         return color(d.group);
-      });
+      })
+    //   div.transition()		
+    //   .duration(500)		
+    //   .style("opacity", 0);	
+      div2.transition()		
+      .duration(500)		
+      .style("opacity", 0);	
+      ;
   }
 
   function mouseover(event, d) {
@@ -84,6 +91,7 @@ d3.csv("result-2.csv", function (d) {
       .style("left", 600 + "px")
       .style("top", 158 + "px");
     div2.transition().duration(200).style("opacity", 0.9);
+    console.log(d.role);
     if(d.role="1"){
         div2.html("adc"+"\n")
         .style("left", 800 + "px")

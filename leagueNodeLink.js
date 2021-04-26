@@ -1,7 +1,7 @@
 let dataset = [];
 
 const margin = { top: 10, bottom: 10, left: 10, right: 10 };
-var svgWidth = 2000;
+var svgWidth = 1000;
 var svgHeight = 1000;
 
 d3.csv("result-2.csv", function (d) {
@@ -9,8 +9,15 @@ d3.csv("result-2.csv", function (d) {
     name: d["name"],
     source: d["source"],
     target: d["role"],
-    weight: 10,
+    weight: d['winPercent'],
     win: d["winPercent"],
+    item:d["|__firstItems__name"],
+    oneSkill: d["|__skills__order__001"],
+    twoSkill: d["|__skills__order__002"],
+    threeSkill: d["|__skills__order__003"],
+    fourSkill: d["|__skills__order__004"],
+    bestItem: d["|__items__name"]
+,
   };
 }).then(function (links) {
   //data
@@ -25,6 +32,12 @@ d3.csv("result-2.csv", function (d) {
         group: data.target,
         winRate: data.win,
         role: data.target,
+        item: data.item,
+        oneSkill: data.oneSkill,
+        twoSkill: data.twoSkill,
+        threeSkill: data.threeSkill,
+        fourSkill: data.fourSkill,
+        best: data.bestItem,
       });
       nodesAdded[data.source] = data.weight;
     }
@@ -66,17 +79,19 @@ d3.csv("result-2.csv", function (d) {
     d3.select(".node" + d.id)
       .transition()
       .duration(1000)
-      .attr("r", 5)
+      .attr("r", function (d){
+        return d.winRate/6;
+    })
       .attr("fill", function (d) {
         return color(d.group);
       })
     //   div.transition()		
     //   .duration(500)		
     //   .style("opacity", 0);	
-      div2.transition()		
-      .duration(500)		
-      .style("opacity", 0);	
-      ;
+    //   div2.transition()		
+    //   .duration(500)		
+    //   .style("opacity", 0);	
+    //   ;
   }
 
   function mouseover(event, d) {
@@ -87,36 +102,36 @@ d3.csv("result-2.csv", function (d) {
 
     div.transition().duration(200).style("opacity", 0.9);
     div
-      .html(d.name + "<br/>" + "\n" + "Win Percentage: " + d.winRate)
-      .style("left", 600 + "px")
+      .html(d.name + "<br/>" + "\n" + "Win Percentage: " + d.winRate+ "<br/>" +"\n"+"Recommanded 1st item: " + d.item+  "<br/>" + "\n"+" Recommanded skill order: " + d.oneSkill+ "\n"+d.twoSkill+ "\n"+d.threeSkill+ "\n"+d.fourSkill+"<br/>"+ "\n"+"Best Item: "+ d.best)
+      .style("left", 200 + "px")
       .style("top", 158 + "px");
-    div2.transition().duration(200).style("opacity", 0.9);
-    console.log(d.role);
-    if(d.role="1"){
-        div2.html("adc"+"\n")
-        .style("left", 800 + "px")
-      .style("top", 158 + "px");
-    }
-    else if(d.role=2){
-        div2.html("mid"+"\n")
-        .style("left", 800 + "px")
-      .style("top", 158 + "px");
-    }
-    else if(d.role=3){
-        div2.html("top"+"\n")
-        .style("left", 800 + "px")
-      .style("top", 158 + "px");
-    }
-    else if(d.role=4){
-        div2.html("jungle"+"\n")
-        .style("left", 800 + "px")
-      .style("top", 158 + "px");
-    }
-    else if(d.role=5){
-        div2.html("support"+"\n")
-        .style("left", 800 + "px")
-      .style("top", 158 + "px");
-    }
+    // div2.transition().duration(200).style("opacity", 0.9);
+    // console.log(d.role);
+    // if(d.role=1){
+    //     div2.html("adc"+"\n")
+    //     .style("left", 800 + "px")
+    //   .style("top", 158 + "px");
+    // }
+    // else if(d.role="2"){
+    //     div2.html("mid"+"\n")
+    //     .style("left", 800 + "px")
+    //   .style("top", 158 + "px");
+    // }
+    // else if(d.role="3"){
+    //     div2.html("top"+"\n")
+    //     .style("left", 800 + "px")
+    //   .style("top", 158 + "px");
+    // }
+    // else if(d.role="4"){
+    //     div2.html("jungle"+"\n")
+    //     .style("left", 800 + "px")
+    //   .style("top", 158 + "px");
+    // }
+    // else if(d.role="5"){
+    //     div2.html("support"+"\n")
+    //     .style("left", 800 + "px")
+    //   .style("top", 158 + "px");
+    // }
   }
 
   var link = svg
@@ -150,7 +165,48 @@ d3.csv("result-2.csv", function (d) {
     .attr("fill", function (d) {
       return color(d.group);
     });
-
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 100)
+    .style("font-size", "15px")
+    .style("font-weight", "bold")
+    .text("Legend color role:");
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 120)
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .text("Red: Adc");
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 140)
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .text("Yellow: Support");
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 160)
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .text("Green: Mid");
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 180)
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .text("Orange: Jungle");
+    svg.append("text")
+    .attr("x", 50)
+    .attr("y", 200)
+    .style("font-size", "10px")
+    .style("font-weight", "bold")
+    .text("Purple: Top");
+    // var lables = node.append("text")
+    // .text(function(d) {
+    //   return d.name;
+    // })
+    // .attr('x', 6)
+    // .attr('y', 3);
   simulation.nodes(nodes).on("tick", ticked);
 
   simulation.force("link").links(links);
@@ -171,7 +227,9 @@ d3.csv("result-2.csv", function (d) {
       });
 
     node
-      .attr("r", 5)
+      .attr("r", function (d){
+          return d.winRate/6;
+      })
       .attr("cx", function (d) {
         return d.x;
       })
@@ -179,8 +237,8 @@ d3.csv("result-2.csv", function (d) {
         return d.y;
       })
       .text(function (d) {
-        return d["name"];
-      });
+        return d.name;
+      })
   }
 
   function dragstarted(event, d) {

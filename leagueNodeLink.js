@@ -9,15 +9,14 @@ d3.csv("result-2.csv", function (d) {
     name: d["name"],
     source: d["source"],
     target: d["role"],
-    weight: d['winPercent'],
+    weight: d["winPercent"],
     win: d["winPercent"],
-    item:d["|__firstItems__name"],
+    item: d["|__firstItems__name"],
     oneSkill: d["|__skills__order__001"],
     twoSkill: d["|__skills__order__002"],
     threeSkill: d["|__skills__order__003"],
     fourSkill: d["|__skills__order__004"],
-    bestItem: d["|__items__name"]
-,
+    bestItem: d["|__items__name"],
   };
 }).then(function (links) {
   //data
@@ -51,12 +50,12 @@ d3.csv("result-2.csv", function (d) {
     .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
-    // Define the div for the tooltip
+  // Define the div for the tooltip
   var div2 = d3
-  .select("body")
-  .append("div")
-  .attr("class", "tooltip")
-  .style("opacity", 0);
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
   //force sim
   var simulation = d3
     .forceSimulation()
@@ -79,18 +78,18 @@ d3.csv("result-2.csv", function (d) {
     d3.select(".node" + d.id)
       .transition()
       .duration(1000)
-      .attr("r", function (d){
-        return d.winRate/6;
-    })
+      .attr("r", function (d) {
+        return d.winRate / 6;
+      })
       .attr("fill", function (d) {
         return color(d.group);
-      })
-    //   div.transition()		
-    //   .duration(500)		
-    //   .style("opacity", 0);	
-    //   div2.transition()		
-    //   .duration(500)		
-    //   .style("opacity", 0);	
+      });
+    //   div.transition()
+    //   .duration(500)
+    //   .style("opacity", 0);
+    //   div2.transition()
+    //   .duration(500)
+    //   .style("opacity", 0);
     //   ;
   }
 
@@ -102,7 +101,31 @@ d3.csv("result-2.csv", function (d) {
 
     div.transition().duration(200).style("opacity", 0.9);
     div
-      .html(d.name + "<br/>" + "\n" + "Win Percentage: " + d.winRate+ "<br/>" +"\n"+"Recommanded 1st item: " + d.item+  "<br/>" + "\n"+" Recommanded skill order: " + d.oneSkill+ "\n"+d.twoSkill+ "\n"+d.threeSkill+ "\n"+d.fourSkill+"<br/>"+ "\n"+"Best Item: "+ d.best)
+      .html(
+        d.name +
+          "<br/>" +
+          "\n" +
+          "Win Percentage: " +
+          d.winRate +
+          "<br/>" +
+          "\n" +
+          "Recommanded 1st item: " +
+          d.item +
+          "<br/>" +
+          "\n" +
+          " Recommanded skill order: " +
+          d.oneSkill +
+          "\n" +
+          d.twoSkill +
+          "\n" +
+          d.threeSkill +
+          "\n" +
+          d.fourSkill +
+          "<br/>" +
+          "\n" +
+          "Best Item: " +
+          d.best
+      )
       .style("left", 200 + "px")
       .style("top", 158 + "px");
     // div2.transition().duration(200).style("opacity", 0.9);
@@ -165,48 +188,54 @@ d3.csv("result-2.csv", function (d) {
     .attr("fill", function (d) {
       return color(d.group);
     });
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 100)
     .style("font-size", "15px")
     .style("font-weight", "bold")
     .text("Legend color role:");
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 120)
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .text("Red: Adc");
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 140)
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .text("Yellow: Support");
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 160)
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .text("Green: Mid");
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 180)
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .text("Orange: Jungle");
-    svg.append("text")
+  svg
+    .append("text")
     .attr("x", 50)
     .attr("y", 200)
     .style("font-size", "10px")
     .style("font-weight", "bold")
     .text("Purple: Top");
-    // var lables = node.append("text")
-    // .text(function(d) {
-    //   return d.name;
-    // })
-    // .attr('x', 6)
-    // .attr('y', 3);
+  // var lables = node.append("text")
+  // .text(function(d) {
+  //   return d.name;
+  // })
+  // .attr('x', 6)
+  // .attr('y', 3);
   simulation.nodes(nodes).on("tick", ticked);
 
   simulation.force("link").links(links);
@@ -227,8 +256,8 @@ d3.csv("result-2.csv", function (d) {
       });
 
     node
-      .attr("r", function (d){
-          return d.winRate/6;
+      .attr("r", function (d) {
+        return d.winRate / 6;
       })
       .attr("cx", function (d) {
         return d.x;
@@ -238,7 +267,7 @@ d3.csv("result-2.csv", function (d) {
       })
       .text(function (d) {
         return d.name;
-      })
+      });
   }
 
   function dragstarted(event, d) {
